@@ -1,0 +1,802 @@
+/* =========================================================
+   1. VARIABLES (les "réglages" du design)
+   Pour changer une couleur partout sur le site,
+   il suffit de la modifier ici, une seule fois.
+   ========================================================= */
+:root {
+  /* Couleurs de fond (du plus sombre au plus clair) */
+  --bg: #0b0b12;            /* fond principal de la page */
+  --bg-soft: #12121c;       /* fond des sections alternées */
+  --card: #181826;          /* fond des cartes */
+
+  /* Couleurs de texte */
+  --text: #e8e8f0;          /* texte principal */
+  --text-muted: #9a9ab0;    /* texte secondaire, plus discret */
+
+  /* Accents violets */
+  --accent: #8b5cf6;        /* violet principal */
+  --accent-light: #a78bfa;  /* violet clair (survol, détails) */
+  --accent-glow: rgba(139, 92, 246, 0.25); /* halo violet transparent */
+
+  /* Bordures et formes */
+  --border: #26263a;
+  --radius: 14px;           /* arrondi des coins */
+
+  /* Police : Inter, avec des polices de secours si elle ne charge pas */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* =========================================================
+   2. REMISE À ZÉRO (reset)
+   Les navigateurs ajoutent des marges par défaut différentes.
+   On les retire pour partir d'une base propre.
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* la largeur inclut le padding : plus simple à calculer */
+}
+
+/* Défilement fluide quand on clique sur un lien de navigation */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* évite que la barre fixe cache le titre de la section */
+}
+
+/* =========================================================
+   3. STYLE GÉNÉRAL DE LA PAGE
+   ========================================================= */
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6; /* espace entre les lignes : améliore la lecture */
+}
+
+a {
+  color: inherit;          /* les liens prennent la couleur du texte autour */
+  text-decoration: none;   /* on retire le soulignement par défaut */
+}
+
+ul {
+  list-style: none;        /* on retire les puces des listes */
+}
+
+img {
+  max-width: 100%;         /* une image ne dépasse jamais son conteneur */
+  display: block;
+}
+
+/* =========================================================
+   4. CONTENEUR
+   Centre le contenu et limite sa largeur sur grand écran.
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;          /* "auto" à gauche et à droite = centré */
+  padding: 0 1.5rem;       /* petit espace sur les côtés, surtout utile sur mobile */
+}
+
+/* =========================================================
+   5. BARRE DE NAVIGATION
+   ========================================================= */
+.site-header {
+  position: fixed;         /* reste collée en haut quand on défile */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;            /* reste au-dessus du reste du contenu */
+  background-color: rgba(11, 11, 18, 0.85); /* fond sombre un peu transparent */
+  backdrop-filter: blur(10px);              /* effet de flou derrière la barre */
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+  display: flex;                  /* place logo et liens sur la même ligne */
+  justify-content: space-between; /* logo à gauche, liens à droite */
+  align-items: center;            /* centrage vertical */
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-light);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;                    /* espace entre chaque lien */
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s;         /* changement de couleur en douceur */
+}
+
+.nav-links a:hover {
+  color: var(--accent-light);     /* le lien devient violet au survol */
+}
+
+/* =========================================================
+   6. SECTIONS ET TITRES
+   ========================================================= */
+.section {
+  padding: 6rem 0;                /* grand espace au-dessus et en dessous */
+}
+
+/* Une section sur deux a un fond légèrement différent : ça rythme la page */
+.section:nth-of-type(even) {
+  background-color: var(--bg-soft);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+/* Petit trait violet décoratif sous chaque titre */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  margin-top: 0.6rem;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   7. SECTION D'ACCUEIL (base : le détail viendra à l'étape 3)
+   ========================================================= */
+.hero {
+  min-height: 100vh;              /* occupe toute la hauteur de l'écran */
+  display: flex;
+  align-items: center;            /* contenu centré verticalement */
+  padding-top: 70px;              /* compense la hauteur de la barre fixe */
+}
+
+/* =========================================================
+   8. PIED DE PAGE
+   ========================================================= */
+.site-footer {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   9. ACCUEIL (hero) : textes et boutons
+   ========================================================= */
+.hero-badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  background-color: var(--accent-glow);   /* fond violet transparent */
+  border: 1px solid var(--accent);
+  border-radius: 999px;                   /* forme de pilule */
+}
+
+.hero-title {
+  /* clamp(min, idéal, max) : la taille s'adapte à la largeur de l'écran */
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.accent-text {
+  color: var(--accent-light);             /* le nom ressort en violet */
+}
+
+.hero-subtitle {
+  margin-top: 0.8rem;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.hero-text {
+  max-width: 560px;                       /* évite des lignes trop longues */
+  margin-top: 1.2rem;
+  color: var(--text-muted);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;                        /* les boutons passent à la ligne si besoin */
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* =========================================================
+   10. BOUTONS (réutilisables partout sur le site)
+   ========================================================= */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);            /* le bouton se soulève au survol */
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-light);
+}
+
+.btn-outline {
+  border: 1px solid var(--accent);
+  color: var(--accent-light);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent-glow);
+}
+
+/* =========================================================
+   11. SECTION À PROPOS
+   ========================================================= */
+.about-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;       /* colonne photo fixe + texte flexible */
+  gap: 3rem;
+  align-items: center;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;                     /* cercle */
+  object-fit: cover;                      /* la photo remplit le cercle sans être déformée */
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* Cercle avec initiales quand il n'y a pas de photo */
+.avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  background-color: var(--card);
+}
+
+.about-text p {
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* colonnes automatiques */
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.highlights li {
+  padding: 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.highlight-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.highlight-value {
+  font-weight: 600;
+}
+
+/* =========================================================
+   12. ÉTIQUETTES (tags) : utilisées pour compétences et projets
+   ========================================================= */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;          /* passe à la ligne quand il n'y a plus de place */
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent-light);
+  background-color: var(--accent-glow);
+  border-radius: 999px;     /* forme de pilule */
+}
+
+/* =========================================================
+   13. COMPÉTENCES
+   ========================================================= */
+.skills-grid {
+  display: grid;
+  /* Autant de colonnes que possible, chacune d'au moins 260px.
+     Sur mobile, on passe automatiquement à 1 colonne. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  padding: 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.skill-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.skill-category {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* =========================================================
+   14. PROJETS
+   ========================================================= */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;   /* image en haut, texte en dessous */
+  overflow: hidden;         /* l'image suit les coins arrondis de la carte */
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px var(--accent-glow);  /* halo violet */
+}
+
+.project-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;        /* l'image remplit l'espace sans être déformée */
+}
+
+/* Bloc affiché quand un projet n'a pas encore d'image */
+.project-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  background: linear-gradient(135deg, var(--accent-glow), var(--bg-soft));
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                  /* le corps prend toute la hauteur restante */
+  padding: 1.5rem;
+}
+
+.project-title {
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.project-description {
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;         /* pousse les liens en bas, cartes alignées entre elles */
+  padding-top: 1.2rem;
+}
+
+.project-link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent-light);
+  transition: color 0.2s;
+}
+
+.project-link:hover {
+  color: #fff;
+}
+
+/* =========================================================
+   15. PARCOURS (frise chronologique)
+   ========================================================= */
+.timeline {
+  position: relative;
+  max-width: 750px;
+  padding-left: 2rem;                 /* espace pour la ligne et les points */
+  border-left: 2px solid var(--border); /* la ligne verticale */
+}
+
+.timeline-item {
+  position: relative;                 /* sert de repère pour placer le point */
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Le point violet sur la ligne, dessiné sans balise HTML supplémentaire */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-2rem - 7px);            /* se place exactement sur la ligne */
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--accent-glow); /* halo autour du point */
+}
+
+.timeline-period {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-light);
+}
+
+.timeline-title {
+  margin-top: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.timeline-place {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.timeline-description {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   16. CONTACT
+   ========================================================= */
+.contact-card {
+  max-width: 650px;
+  padding: 2rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.contact-intro {
+  margin-bottom: 1.5rem;
+  color: var(--text-muted);
+}
+
+.contact-list {
+  display: grid;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.contact-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.contact-list a {
+  color: var(--accent-light);
+  font-weight: 500;
+  word-break: break-all;              /* évite qu'un long email déborde sur mobile */
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.social-link {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.social-link:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+}
+
+/* =========================================================
+   16b. CONTACT : mise en page en deux colonnes
+   ========================================================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;   /* infos à gauche, formulaire un peu plus large */
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Le bloc de gauche n'a plus besoin de bordure de carte */
+.contact-info .social-links {
+  border-top: 1px solid var(--border);
+}
+
+/* =========================================================
+   17. FORMULAIRE
+   ========================================================= */
+.contact-form {
+  padding: 2rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Style commun aux champs de saisie */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-family: var(--font);   /* sinon les champs gardent la police par défaut du navigateur */
+  font-size: 1rem;
+  color: var(--text);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group textarea {
+  resize: vertical;           /* le visiteur peut agrandir en hauteur seulement */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Quand on clique dans un champ : bordure violette et halo */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* Message d'erreur ou de confirmation */
+.form-status {
+  min-height: 1.5rem;         /* réserve la place pour éviter un saut de mise en page */
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-status.error {
+  color: #f87171;             /* rouge doux */
+}
+
+.form-status.success {
+  color: #4ade80;             /* vert doux */
+}
+
+/* Le bouton est un <button> : il faut lui retirer le style par défaut */
+button.btn {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 1rem;
+}
+
+/* Sur écran étroit : les deux colonnes s'empilent */
+@media (max-width: 800px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   18. BOUTON BURGER
+   Caché sur ordinateur, affiché sur mobile (voir plus bas)
+   ========================================================= */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;                 /* 44px minimum : taille confortable pour un doigt */
+  height: 44px;
+  padding: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Les 3 traits */
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  background-color: var(--text);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Quand le menu est ouvert, le burger se transforme en croix (X) */
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;                  /* le trait du milieu disparaît */
+}
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =========================================================
+   19. ANIMATIONS D'APPARITION
+   .reveal = état de départ ; .visible = état final
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* =========================================================
+   20. RESPONSIVE : TABLETTES ET TÉLÉPHONES
+   ========================================================= */
+@media (max-width: 768px) {
+
+  /* --- Menu mobile --- */
+  .menu-toggle {
+    display: flex;             /* le burger apparaît */
+  }
+
+  .nav-links {
+    position: absolute;        /* le menu se place sous la barre (le header est "fixed") */
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;    /* liens empilés verticalement */
+    gap: 0;
+    padding: 0.5rem 1.5rem 1rem;
+    background-color: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+
+    /* État fermé : invisible et légèrement remonté */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+  }
+
+  /* État ouvert : ajouté par JavaScript */
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.9rem 0;         /* zone de clic plus grande */
+    font-size: 1.05rem;
+  }
+
+  /* --- Sections plus compactes --- */
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+  }
+
+  /* --- À propos : photo au-dessus, texte en dessous, centré --- */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .about-text {
+    text-align: left;
+  }
+
+  /* --- Cartes de projets : une colonne, même sur les petits téléphones.
+     minmax(300px) pourrait déborder sur un écran de 320px, donc on le remplace. --- */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Boutons de l'accueil sur toute la largeur : plus faciles à toucher */
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-form {
+    padding: 1.25rem;          /* moins de marge intérieure sur petit écran */
+  }
+}
+
+/* =========================================================
+   21. ACCESSIBILITÉ : respect de "réduire les animations"
+   Si le visiteur a choisi ce réglage dans son système,
+   on supprime défilement fluide et transitions.
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

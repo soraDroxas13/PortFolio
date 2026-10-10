@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- On indique que la page est en français : utile pour les navigateurs et le référencement -->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Indispensable pour que le site s'adapte aux écrans de téléphone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Titre provisoire : on le changera depuis script.js avec ton vrai nom -->
+  <title>Portfolio</title>
+  <meta name="description" content="Portfolio personnel" />
+
+  <!-- Police moderne "Inter" depuis Google Fonts (un seul lien, gratuit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- On relie la feuille de style -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== BARRE DE NAVIGATION ========== -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <!-- Le logo sera rempli par JavaScript -->
+      <a href="#accueil" class="logo" id="logo"></a>
+
+      <!-- Liens vers chaque section (les # pointent vers les id plus bas) -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- NOUVEAU : bouton burger, visible uniquement sur mobile (voir le CSS).
+            aria-label : texte lu par les lecteurs d'écran, car le bouton n'a pas de texte visible.
+            aria-expanded : indique si le menu est ouvert ("true") ou fermé ("false").
+            aria-controls : indique quel élément le bouton contrôle. -->
+       <button class="menu-toggle" id="menu-toggle"
+               aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links">
+         <!-- Les 3 traits du burger -->
+         <span></span>
+         <span></span>
+         <span></span>
+       </button>
+
+    </nav>
+  </header>
+
+  <!-- Le contenu principal de la page -->
+  <main>
+
+    <!-- ========== ACCUEIL ========== -->
+    <section id="accueil" class="hero">
+      <div class="container" id="hero-content">
+        <!-- Rempli par JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========== À PROPOS ========== -->
+    <section id="apropos" class="section">
+      <div class="container">
+        <h2 class="section-title">À propos</h2>
+        <div id="about-content"><!-- Rempli par JavaScript --></div>
+      </div>
+    </section>
+
+    <!-- ========== COMPÉTENCES ========== -->
+    <section id="competences" class="section">
+      <div class="container">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid" id="skills-content"><!-- Rempli par JavaScript --></div>
+      </div>
+    </section>
+
+    <!-- ========== PROJETS ========== -->
+    <section id="projets" class="section">
+      <div class="container">
+        <h2 class="section-title">Projets</h2>
+        <div class="projects-grid" id="projects-content"><!-- Rempli par JavaScript --></div>
+      </div>
+    </section>
+
+    <!-- ========== PARCOURS ========== -->
+    <section id="parcours" class="section">
+      <div class="container">
+        <h2 class="section-title">Parcours</h2>
+        <div class="timeline" id="timeline-content"><!-- Rempli par JavaScript --></div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div id="contact-content"><!-- Rempli par JavaScript --></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== PIED DE PAGE ========== -->
+  <footer class="site-footer">
+    <div class="container" id="footer-content"><!-- Rempli par JavaScript --></div>
+  </footer>
+
+  <!-- Le script est chargé EN DERNIER : ainsi, tous les éléments HTML existent déjà
+       quand JavaScript essaie de les remplir -->
+  <script src="script.js"></script>
+</body>
+</html>
